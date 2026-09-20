@@ -2,4 +2,5 @@
 配置文件
 """
 
-Base_URL='http://kdtx-test.itheima.net'
+# API 基础地址
+Base_URL = 'http://kdtx-test.itheima.net'
