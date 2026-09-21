@@ -1,6 +1,7 @@
 import pytest
 
 from api.api_login import ApiLogin
+from common.common_assert import CommonAssert
 
 
 class TestLogin:
@@ -21,7 +22,5 @@ class TestLogin:
         res = self.login.api_login_method(uuid=uuid)
         print(f'登录成功: {res.json()}')
         # 断言
-        assert res.status_code == 200
-        assert res.json().get('code') == 200
-        assert res.json().get('msg') == '操作成功'
+        CommonAssert.assert_common(res)
         assert res.json().get('token')

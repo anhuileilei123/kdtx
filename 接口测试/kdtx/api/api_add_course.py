@@ -1,5 +1,5 @@
 import requests
-from config import Base_Url
+from config import Base_Url, Headers_Json
 
 class AddCourse:
     """
@@ -18,5 +18,6 @@ class AddCourse:
         """
         url=f'{Base_Url}/api/clues/course'
         data={"name":name,"subject":subject,"price":price,"applicablePerson":applicablePerson,"info":info}
-        res=requests.post(url,headers={'User-Agent':'Mozilla/5.0','Content-Type':'application/json','Authorization':f'Bearer {token}'},json=data)
+        headers={**Headers_Json,'Authorization':f'Bearer {token}'}
+        res=requests.post(url,headers=headers,json=data)
         return res

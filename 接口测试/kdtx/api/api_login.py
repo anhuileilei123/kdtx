@@ -1,5 +1,5 @@
 import requests
-from config import Base_Url
+from config import Base_Url, Headers, Headers_Json
 
 
 class ApiLogin:
@@ -13,7 +13,7 @@ class ApiLogin:
         :return:
         """
         url=f'{Base_Url}/api/captchaImage'
-        res= requests.get(url,headers={'User-Agent':'Mozilla/5.0'})
+        res= requests.get(url,headers=Headers)
         return res
 
     def api_login_method(self,uuid, username='admin', password='HM_2023_test', code=2):
@@ -27,7 +27,7 @@ class ApiLogin:
         """
         url=f'{Base_Url}/api/login'
         data={"username":username,"password":password,"code":code,"uuid":uuid}
-        res=requests.post(url,headers={'User-Agent':'Mozilla/5.0','Content-Type':'application/json'},json=data)
+        res=requests.post(url,headers=Headers_Json,json=data)
         return res
 
 # if __name__ == '__main__':
