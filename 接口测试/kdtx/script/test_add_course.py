@@ -21,3 +21,15 @@ class TestAddCourse:
         print(f'添加课程: {res.json()}')
         # 断言
         CommonAssert.assert_common(res)
+
+    def test_query_course_success(self,get_token):
+        """
+        查找课程成功
+        :param get_token:
+        :return:
+        """
+        res=TestAddCourse.add_course.api_query_course_method(token=get_token,name='测试开发提升课01')
+        # 断言
+        assert res.status_code==200
+        assert '成功'in res.json().get('msg')
+        assert res.json().get('code')==200

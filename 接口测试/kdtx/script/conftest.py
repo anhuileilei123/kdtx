@@ -10,7 +10,7 @@ def get_token():
     :return:
     """
     login = ApiLogin()
-    res_captcha = login.api_captchaImage()
+    res_captcha = login.api_captcha_image()
     token_uuid = res_captcha.json().get('uuid')
-    res_login = login.api_login_method(uuid=token_uuid)
+    res_login = login.api_login_method(username='admin', password='HM_2023_test', code='2', uuid=token_uuid)
     yield res_login.json().get('token')
