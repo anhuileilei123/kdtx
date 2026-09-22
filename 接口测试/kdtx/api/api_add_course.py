@@ -5,7 +5,7 @@ class AddCourse:
     """
     添加课程模块类
     """
-    def api_add_course_method(self, token, name, subject, price, applicablePerson, info=None):
+    def api_add_course_method(self, token, name=None, subject=None, price=None, applicablePerson=None, info=None):
         """
         添加课程方法
         :param token: 登录接口返回的token
@@ -18,7 +18,11 @@ class AddCourse:
         """
         url=f'{Base_Url}/api/clues/course'
         data={"name":name,"subject":subject,"price":price,"applicablePerson":applicablePerson,"info":info}
-        headers={**Headers_Json,'Authorization':f'Bearer {token}'}
+        # 必填字段缺失用例：未传入的参数不放进请求体，真实模拟"字段缺失"而非传null
+        data = {k: v for k, v in data.items() if v is not None}
+        headers={**Headers_Json}
+        if token:
+            headers['Authorization']=f'Bearer {token}'
         res=requests.post(url,headers=headers,json=data)
         return res
     def api_query_course_method(self, token,name=None):

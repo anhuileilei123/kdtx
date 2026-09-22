@@ -1,0 +1,181 @@
+{
+  "desc": "新增课程接口（POST /api/clues/course）测试用例",
+  "env": {
+    "base_url": "http://kdtx-test.itheima.net",
+    "add_course_path": "/api/clues/course"
+  },
+  "cases": [
+    {
+      "case_id": "add_course_001",
+      "case_name": "新增课程成功-必填+选填全部填写",
+      "request": {
+        "name": "测试开发提升课01",
+        "subject": "6",
+        "price": 899,
+        "applicablePerson": "2",
+        "info": "测试开发提升课01"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 200,
+        "msg": "操作成功"
+      }
+    },
+    {
+      "case_id": "add_course_002",
+      "case_name": "新增课程成功-不传选填字段info",
+      "request": {
+        "name": "测试开发提升课02",
+        "subject": "6",
+        "price": 899,
+        "applicablePerson": "2"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 200,
+        "msg": "操作成功"
+      }
+    },
+    {
+      "case_id": "add_course_003",
+      "case_name": "新增课程失败-未登录不带token",
+      "request": {
+        "name": "测试开发提升课03",
+        "subject": "6",
+        "price": 899,
+        "applicablePerson": "2",
+        "info": "测试开发提升课03"
+      },
+      "no_token": true,
+      "expect": {
+        "status_code": 200,
+        "code": 401,
+        "msg": "请求访问：/clues/course，认证失败，无法访问系统资源"
+      }
+    },
+    {
+      "case_id": "add_course_004",
+      "case_name": "新增课程-课程名称为空",
+      "request": {
+        "name": "",
+        "subject": "6",
+        "price": 899,
+        "applicablePerson": "2",
+        "info": "测试开发提升课04"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 200,
+        "msg": "操作成功"
+      }
+    },
+    {
+      "case_id": "add_course_005",
+      "case_name": "新增课程-课程学科为空",
+      "request": {
+        "name": "测试开发提升课05",
+        "subject": "",
+        "price": 899,
+        "applicablePerson": "2",
+        "info": "测试开发提升课05"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 200,
+        "msg": "操作成功"
+      }
+    },
+    {
+      "case_id": "add_course_006",
+      "case_name": "新增课程-课程价格为空",
+      "request": {
+        "name": "测试开发提升课06",
+        "subject": "6",
+        "price": null,
+        "applicablePerson": "2",
+        "info": "测试开发提升课06"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 200,
+        "msg": "操作成功"
+      }
+    },
+    {
+      "case_id": "add_course_007",
+      "case_name": "新增课程-适用人群为空",
+      "request": {
+        "name": "测试开发提升课07",
+        "subject": "6",
+        "price": 899,
+        "applicablePerson": "",
+        "info": "测试开发提升课07"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 200,
+        "msg": "操作成功"
+      }
+    },
+    {
+      "case_id": "add_course_008",
+      "case_name": "新增课程-必填字段name缺失",
+      "request": {
+        "subject": "6",
+        "price": 899,
+        "applicablePerson": "2",
+        "info": "测试开发提升课08"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 200,
+        "msg": "操作成功"
+      }
+    },
+    {
+      "case_id": "add_course_009",
+      "case_name": "新增课程-必填字段subject缺失",
+      "request": {
+        "name": "测试开发提升课09",
+        "price": 899,
+        "applicablePerson": "2",
+        "info": "测试开发提升课09"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 200,
+        "msg": "操作成功"
+      }
+    },
+    {
+      "case_id": "add_course_010",
+      "case_name": "新增课程-必填字段price缺失",
+      "request": {
+        "name": "测试开发提升课10",
+        "subject": "6",
+        "applicablePerson": "2",
+        "info": "测试开发提升课10"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 200,
+        "msg": "操作成功"
+      }
+    },
+    {
+      "case_id": "add_course_011",
+      "case_name": "新增课程-必填字段applicablePerson缺失",
+      "request": {
+        "name": "测试开发提升课11",
+        "subject": "6",
+        "price": 899,
+        "info": "测试开发提升课11"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 200,
+        "msg": "操作成功"
+      }
+    }
+  ]
+}
