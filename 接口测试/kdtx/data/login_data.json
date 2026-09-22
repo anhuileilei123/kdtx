@@ -1,0 +1,214 @@
+{
+  "desc": "登录接口（POST /api/login）测试用例",
+  "env": {
+    "base_url": "http://kdtx-test.itheima.net",
+    "captcha_path": "/api/captchaImage",
+    "login_path": "/api/login"
+  },
+  "cases": [
+    {
+      "case_id": "login_001",
+      "case_name": "登录成功-正确的用户名密码及验证码",
+      "request": {
+        "username": "admin",
+        "password": "HM_2023_test",
+        "code": "2",
+        "uuid": "${uuid}"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 200,
+        "msg": "操作成功",
+        "token_not_null": true
+      }
+    },
+    {
+      "case_id": "login_002",
+      "case_name": "登录失败-用户名错误",
+      "request": {
+        "username": "admin001",
+        "password": "HM_2023_test",
+        "code": "2",
+        "uuid": "${uuid}"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": "用户不存在/密码错误",
+        "token_not_null": false
+      }
+    },
+    {
+      "case_id": "login_003",
+      "case_name": "登录失败-密码错误",
+      "request": {
+        "username": "admin",
+        "password": "HM_2023_test123",
+        "code": "2",
+        "uuid": "${uuid}"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": "用户不存在/密码错误",
+        "token_not_null": false
+      }
+    },
+    {
+      "case_id": "login_004",
+      "case_name": "登录失败-验证码错误",
+      "request": {
+        "username": "admin",
+        "password": "HM_2023_test",
+        "code": "999999",
+        "uuid": "${uuid}"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": "验证码错误",
+        "token_not_null": false
+      }
+    },
+    {
+      "case_id": "login_005",
+      "case_name": "登录失败-验证码为空",
+      "request": {
+        "username": "admin",
+        "password": "HM_2023_test",
+        "code": "",
+        "uuid": "${uuid}"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": "验证码错误",
+        "token_not_null": false
+      }
+    },
+    {
+      "case_id": "login_006",
+      "case_name": "登录失败-uuid为空",
+      "request": {
+        "username": "admin",
+        "password": "HM_2023_test",
+        "code": "2",
+        "uuid": ""
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": "验证码已失效",
+        "token_not_null": false
+      }
+    },
+    {
+      "case_id": "login_007",
+      "case_name": "登录失败-uuid伪造不存在",
+      "request": {
+        "username": "admin",
+        "password": "HM_2023_test",
+        "code": "2",
+        "uuid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": "验证码已失效",
+        "token_not_null": false
+      }
+    },
+    {
+      "case_id": "login_008",
+      "case_name": "登录失败-用户名为空",
+      "request": {
+        "username": "",
+        "password": "HM_2023_test",
+        "code": "2",
+        "uuid": "${uuid}"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": "用户不存在/密码错误",
+        "token_not_null": false
+      }
+    },
+    {
+      "case_id": "login_009",
+      "case_name": "登录失败-密码为空",
+      "request": {
+        "username": "admin",
+        "password": "",
+        "code": "2",
+        "uuid": "${uuid}"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": "用户不存在/密码错误",
+        "token_not_null": false
+      }
+    },
+    {
+      "case_id": "login_010",
+      "case_name": "登录失败-必填字段username缺失",
+      "request": {
+        "password": "HM_2023_test",
+        "code": "2",
+        "uuid": "${uuid}"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": "用户不存在/密码错误",
+        "token_not_null": false
+      }
+    },
+    {
+      "case_id": "login_011",
+      "case_name": "登录失败-必填字段password缺失",
+      "request": {
+        "username": "admin",
+        "code": "2",
+        "uuid": "${uuid}"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": "用户不存在/密码错误",
+        "token_not_null": false
+      }
+    },
+    {
+      "case_id": "login_012",
+      "case_name": "登录失败-必填字段code缺失",
+      "request": {
+        "username": "admin",
+        "password": "HM_2023_test",
+        "uuid": "${uuid}"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": null,
+        "token_not_null": false
+      }
+    },
+    {
+      "case_id": "login_013",
+      "case_name": "登录失败-必填字段uuid缺失",
+      "request": {
+        "username": "admin",
+        "password": "HM_2023_test",
+        "code": "2"
+      },
+      "expect": {
+        "status_code": 200,
+        "code": 500,
+        "msg": "验证码已失效",
+        "token_not_null": false
+      }
+    }
+  ]
+}
